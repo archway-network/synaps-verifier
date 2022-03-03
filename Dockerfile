@@ -30,7 +30,8 @@ RUN chmod 700 /root/* \
 
 # Let's keep it in a separate layer
 RUN go get github.com/go-delve/delve/cmd/dlv \
-    && go build -mod=readonly -o /build/app .
+    && go build -mod=readonly -o /build/app . \
+    && cp -r ui /build
 
 ENTRYPOINT [ "dlv", "debug", "--headless", "--log", "--listen=:2345", "--api-version=2"]
 # ENTRYPOINT ["tail", "-f", "/dev/null"]
