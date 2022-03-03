@@ -89,10 +89,10 @@ func GetSessionDetails(sessionId string) (SessionDetails, error) {
 // it then receives theresponse body in bytes
 func callSynapsAPI(api string, reqMethod string, postBody []byte, additionalHeaders ...map[string]string) ([]byte, error) {
 
-	apiKey := os.Getenv("API_KEY")
-	clientId := os.Getenv("CLIENT_ID")
+	apiKey := os.Getenv("KYC_API_KEY")
+	clientId := os.Getenv("KYC_CLIENT_ID")
 
-	fullApiPath := os.Getenv("API_PATH") + api
+	fullApiPath := os.Getenv("KYC_API_PATH") + api
 
 	req, err := http.NewRequest(reqMethod, fullApiPath, bytes.NewBuffer(postBody))
 	if err != nil {
