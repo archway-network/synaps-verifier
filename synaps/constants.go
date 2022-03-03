@@ -1,0 +1,25 @@
+package synaps
+
+const (
+	REQUEST_METHOD_POST = "POST"
+	REQUEST_METHOD_GET  = "GET"
+
+	SESSION_ID    = "session_id"
+	SESSION_ALIAS = "alias"
+
+	API_SESSION_INIT            = "/session/init"
+	API_SESSION_INIT_WITH_ALIAS = "/session/init?alias=%s"
+	API_SESSION_FINISHED        = "/session/list/FINISHED"
+	API_SESSION_PENDING         = "/session/list/PENDING"
+	API_SESSION_DETAILS         = "/onboarding/details"
+
+	API_HEADER_SESSION_ID = "Session-Id"
+	API_HEADER_API_KEY    = "Api-Key"
+	API_HEADER_CLIENT_ID  = "Client-Id"
+
+	VERIFICATION_STEP_IDENTITY = "IDENTITY"
+	VERIFICATION_STEP_LIVENESS = "LIVENESS"
+
+	VERIFICATION_STATE_VALIDATED = "VALIDATED"
+	VERIFICATION_STATE_PENDING   = "PENDING"
+)
