@@ -3,6 +3,7 @@ package api
 import (
 	"log"
 	"net/http"
+	"strings"
 
 	"github.com/archway-network/synaps-verifier/synaps"
 	"github.com/archway-network/synaps-verifier/tools"
@@ -16,7 +17,7 @@ import (
  */
 func GetSynapsSessionId(resp http.ResponseWriter, req *http.Request, params routing.Params) {
 
-	email := params.ByName("email")
+	email := strings.ToLower(params.ByName("email"))
 	sessionId, err := synaps.GetSessionId(email)
 
 	if err != nil {
