@@ -1,0 +1,37 @@
+version: '3.6'
+services:
+  synaps-verifier:
+    image: archwaynetwork/synaps-verifier:latest
+    container_name: synaps-verifier
+    build:
+      context: ./
+      # target: development  # development | test | production (default) # docker-compose up --build
+    ports: 
+      - 8000:80
+      - 2347:2345
+    volumes:
+      - ./:/go/src/app
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "200k"
+        max-file: "10"
+    networks:
+      - archwaynetwork
+    environment:
+      SERVING_ADDR: ${SYNAPS_VERIFIER_SERVING_ADDR:-:80} 
+      KYC_API_KEY: ${KYC_API_KEY:-}
+      KYC_CLIENT_ID: ${KYC_CLIENT_ID:-}
+      KYC_API_PATH: ${KYC_API_PATH:-https://individual-api.synaps.io/v3}
+    healthcheck:
+      test: curl --fail http://localhost:80/ || exit 1
+      interval: 30s
+      retries: 10 # Will try for 5 minutes      
+    restart: always
+    security_opt:
+      - "seccomp:unconfined"  
+  #----------------# 
+
+networks:
+  archwaynetwork:
+    driver: bridge
