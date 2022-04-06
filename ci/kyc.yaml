@@ -9,6 +9,7 @@ spec:
       name: http
       targetPort: 80
     - port: 2345
+      name: tools
       targetPort: 2345
   selector:
     app.kubernetes.io/name: synaps-verifier
@@ -32,7 +33,7 @@ spec:
     spec:
       containers:
         - name: synaps-verifier
-          image: synaps-verifier:latest
+          image: mojiz/synaps-verifier:latest
           imagePullPolicy: Always
           ports:
             - containerPort: 80
@@ -41,13 +42,13 @@ spec:
               name: tools
           env:
             - name: SYNAPS_VERIFIER_SERVING_ADDR
-              value: SYNAPS_VERIFIER_SERVING_ADDR_value
+              value: 0.0.0.0
             - name: KYC_API_KEY
-              value: KYC_API_KEY_value
+              value: KYC_API_KEY_VALUE
             - name: KYC_CLIENT_ID
-              value: KYC_CLIENT_ID_value
+              value: S6FA572A7A43A67A
             - name: KYC_API_PATH
-              value: KYC_API_PATH_value
+              value: https://individual-api.synaps.io/v3
 ---
 apiVersion: networking.k8s.io/v1
 kind: Ingress
